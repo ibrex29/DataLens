@@ -1,0 +1,155 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  phoneNumber String?
+  email       String?  @unique
+  password    String
+  roles       Role[]   @relation("UserRoles")
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  roleName    String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  user        User[]   @relation("UserRoles")
+
+  @@map("roles")
+}
+
+model State {
+  id               String            @id @default(uuid())
+  name             String            @unique
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  population       Int
+  createdByUserId  String?
+  localGovernments LocalGovernment[] @relation("StateToLocalGovernment")
+}
+
+model LocalGovernment {
+  id              String   @id @default(uuid())
+  name            String
+  stateId         String
+  population      Int
+  frequentDiseaseCases  String[]
+  state           State    @relation(fields: [stateId], references: [id], name: "StateToLocalGovernment")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  createdByUserId String?
+  wards           Ward[]   @relation("LocalGovernmentToWard")
+}
+
+model Ward {
+  id                String          @id @default(uuid())
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  name              String
+  population        Int?
+  healthCases       Int?
+  localGovernmentId String
+  localGovernment   LocalGovernment @relation(fields: [localGovernmentId], references: [id], name: "LocalGovernmentToWard")
+  facilities        Facility[]      @relation("WardFacility")
+}
+
+model Facility {
+  id                 String               @id @default(uuid())
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  facilityName       String
+  wardId             String
+  ward               Ward                 @relation(fields: [wardId], references: [id], name: "WardFacility")
+  locationId         String
+  location           Location             @relation(fields: [locationId], references: [id])
+  services           FacilityService[]    @relation("FacilityService")
+  FacilityStaff      FacilityStaff[]
+  FacilityIdentifier FacilityIdentifier[] @relation(name: "FacilityIdentifier")
+}
+
+model FacilityIdentifier {
+  id                  String   @id @default(uuid())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  ownershipName       String
+  ownershipType       String
+  facilityLevel       String
+  facilityLevelOption String
+  daysOfOperation     String
+  hoursOfOperation    String
+  registration        String
+  license             String
+  facilityId          String 
+  facility            Facility @relation(fields: [facilityId], references: [id], name: "FacilityIdentifier")
+}
+
+model FacilityService {
+  id                       String   @id @default(uuid())
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+  name                     String
+  facilityId               String
+  facility                 Facility @relation(fields: [facilityId], references: [id], name: "FacilityService")
+  description              String?
+  outPatientServices       Boolean
+  inPatientServices        Boolean
+  medicalServices          Boolean
+  emergencyPreparedness    Boolean
+  surgicalServices         Boolean
+  obstericsServices        Boolean
+  pediatricsServices       Boolean
+  dentalServices           Boolean
+  specificClinicalServices String[]
+  onsiteLaboratory         Boolean
+  onsiteImaging            Boolean
+  onsitePharmacy           Boolean
+  mortuaryServices         Boolean
+  ambulanceServices        Boolean
+}
+
+model Location {
+  id              String     @id @default(uuid())
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  longitude       Float
+  latitude        Float
+  physicalAddress String
+  postalAddress   String?
+  accessRoad      Boolean
+  Facility        Facility[]
+}
+
+model FacilityStaff {
+  id                                            String   @id @default(uuid())
+  createdAt                                     DateTime @default(now())
+  updatedAt                                     DateTime @updatedAt
+  facilityId                                    String
+  facility                                      Facility @relation(fields: [facilityId], references: [id])
+  numberOfDoctors                               Int?
+  numberOfPharmacists                           Int?
+  numberOfPharmacyTechnicians                   Int?
+  numberOfDentists                              Int?
+  numberOfDentalTechnicians                     Int?
+  numberOfNurses                                Int?
+  numberOfMidwifes                              Int?
+  numberOfNursesMidwifes                        Int?
+  numberOfLabTechnicians                        Int?
+  numberOfLabScientists                         Int?
+  healthRecordsHIMOfficers                      Int?
+  numberOfCommunityHealthOfficers               Int?
+  numberOfCommunityHealthExtensionWorkers       Int?
+  numberOfJuniorCommunityHealthExtensionWorkers Int?
+  numberOfEnvironmentalHealthOfficers           Int?
+  numberOfHealthAttendantsAssistants            Int?
+}
