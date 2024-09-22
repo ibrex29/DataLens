@@ -2,11 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, HttpCode
 import { FacilityService } from './facility.service';
 // import { CreateFacilityDto } from './dto/create-facility.dto';
 import { UpdateFacilityDto } from './dto/update-facility.dto';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateFacilityDto } from './dto/create-facility.dto';
 import { Facility } from './entities/facility.entity';
 import { PaginationDto } from 'src/common/pagination.dto';
 
+@ApiTags("Facility Management")
 @Controller('facility')
 export class FacilityController {
   constructor(private readonly facilityService: FacilityService) {}
