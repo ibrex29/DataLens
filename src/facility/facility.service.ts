@@ -63,7 +63,7 @@ export class FacilityService {
   
       // Fetch the related ward by name
       const ward = await this.prisma.ward.findFirst({
-        where: { name: wardName },
+        where: { name: wardName.toUpperCase() },
       });
   
       if (!ward) {
@@ -184,7 +184,11 @@ export class FacilityService {
   return facilities;
 }
   
-async getFacilitiesByLocalGovernment(localGovernmentName: string, paginationDto: PaginationDto): Promise<{
+
+async getFacilitiesByLocalGovernment(
+  localGovernmentName: string,
+  paginationDto: PaginationDto,
+): Promise<{
   data: Facility[];
   count: number;
 }> {
@@ -206,10 +210,12 @@ async getFacilitiesByLocalGovernment(localGovernmentName: string, paginationDto:
     throw new NotFoundException('No wards found for the specified local government area');
   }
 
-  // Pagination parameters
-  const { page = 1, limit = 10 } = paginationDto;
-  const skip = (page - 1) * limit;
-  const take = Number(limit); // Ensure limit is a number
+  // Ensure pagination values come from the user
+  const { page, limit } = paginationDto;
+
+  // If the user provides pagination values, calculate skip and take
+  const skip = page && limit ? (page - 1) * limit : undefined;
+  const take = limit ? Number(limit) : undefined;
 
   // Fetch facilities by ward IDs with related entities included and pagination
   const [facilities, totalFacilities] = await Promise.all([
@@ -245,6 +251,18 @@ async getFacilitiesByLocalGovernment(localGovernmentName: string, paginationDto:
     data: facilities,
     count: totalFacilities,
   };
+}
+
+
+async getAllFacilities() {
+  return this.prisma.facility.findMany({
+    include: {
+      location: true,
+      services: true,
+      FacilityIdentifier: true,
+      FacilityStaff: true,
+    },
+  });
 }
 
   findAll() {

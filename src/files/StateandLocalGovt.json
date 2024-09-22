@@ -1,0 +1,161 @@
+{
+    "state": "Jigawa",
+    "population": 4348649,
+    "frequentDiseaseCases": [
+      "Malaria",
+      "Diarrhea",
+      "Respiratory infections",
+      "Typhoid",
+      "Maternal and Child health issues"
+    ],
+    "healthFacilities": {
+      "tertiaryHospitals": 2,
+      "specialistHospitals": 2,
+      "generalHospitals": 18,
+      "primaryHealthCareCentres": 280,
+      "basicHealthClinics": 260,
+      "healthPosts": 201,
+      "privateHospitalsAndClinics": 37,
+      "specializedCentres": 2,
+      "emergencyOperationCentre": 1,
+      "monocularLaboratory": 1
+    },
+    "localGovernments": [
+      {
+        "name": "Auyo",
+        "population": 132001,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Babura",
+        "population": 208101,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Birniwa",
+        "population": 142329,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Buji",
+        "population": 97371,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Birnin Kudu",
+        "population": 313373,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Dutse",
+        "population": 246143,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Gumel",
+        "population": 107161,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Gwaram",
+        "population": 272582,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Gwiwa",
+        "population": 124517,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Gagarawa",
+        "population": 80394,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Guri",
+        "population": 115018,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Garki",
+        "population": 152233,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Hadejia",
+        "population": 105628,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Jahun",
+        "population": 229094,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Kiri Kasamma",
+        "population": 191523,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Kafin Hausa",
+        "population": 271058,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Kazaure",
+        "population": 161494,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Kiyawa",
+        "population": 172913,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Kaugama",
+        "population": 127956,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Mallam Madori",
+        "population": 161413,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Miga",
+        "population": 128424,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Maigatari",
+        "population": 179715,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Roni",
+        "population": 77819,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Ringim",
+        "population": 192024,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Taura",
+        "population": 130849,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Sule Tankarkar",
+        "population": 131757,
+        "frequentDiseaseCases": []
+      },
+      {
+        "name": "Yankwashi",
+        "population": 95759,
+        "frequentDiseaseCases": []
+      }
+    ]
+  }
+  
